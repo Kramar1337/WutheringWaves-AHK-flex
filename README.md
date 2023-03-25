@@ -1,1 +1,3 @@
-# WutheringWaves-AHK-flex
+# WutheringWaves AHK flex
+
+Жду релиз игры
