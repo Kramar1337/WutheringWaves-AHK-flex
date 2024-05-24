@@ -51,7 +51,8 @@ WindowFocus = ahk_class UnrealWindow
 
 </details>
 
-:memo:__Как запустить?:__:memo:
+<details>
+<summary>:memo:__Как запустить?:__:memo:</summary>
 
 1. Скачать и установить [Autohotkey.com](https://www.autohotkey.com/download/ahk-install.exe)
 
@@ -61,3 +62,5 @@ WindowFocus = ahk_class UnrealWindow
 2. Скачать репозиторий (Code > [Download Zip👌](https://github.com/Kramar1337/WutheringWaves-AHK-flex/archive/main.zip))
 
 3. Запустить "WWFlex.ahk"
+
+</details>
