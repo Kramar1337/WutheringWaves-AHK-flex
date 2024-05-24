@@ -19,6 +19,38 @@ Numpad 2 - Чися рейдж
 Numpad 3 - Банихоп
 ```
 
+<details>
+<summary>Настройки</summary>
+
+Чтобы изменить настройки скрипта: открой "WWFlex.ahk" через блокнот.
+
+```
+key_Pautinka := "T"
+key_Macro := "V"
+key_SkipNPC := "Z"
+key_Fastlyt := "F"
+key_EndExitapp := "End"
+key_PauseSuspend := "Del"
+key_Reload := "Home"
+key_LabelNumpad0 := "Numpad0"
+key_LabelNumpad1 := "Numpad1"
+key_LabelNumpad2 := "Numpad2"
+key_LabelNumpad3 := "Numpad3"
+Checkbox_Pautinka = 1
+Checkbox_Macro = 1
+Checkbox_SkipNPC = 1
+Checkbox_Fastlyt = 1
+Checkbox_PauseSuspend = 0
+Checkbox_Reload = 0
+SelectDefaultMacro = 2
+SkipNPCLockMode = 1
+BhopDelayIn = 100
+FastlytDelayIn = 130
+WindowFocus = ahk_class UnrealWindow
+```
+
+</details>
+
 :memo:__Как запустить?:__:memo:
 
 1. Скачать и установить [Autohotkey.com](https://www.autohotkey.com/download/ahk-install.exe)
