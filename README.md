@@ -2,6 +2,8 @@
 
 AHK скрипт для Wuthering Waves.
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/poIhc7r3EX4/0.jpg)](https://www.youtube.com/watch?v=poIhc7r3EX4)
+
 🙏 Использование скриптов может привести к блокировке учетной записи, использовать на свой страх и риск.
 
 [__✨Boosty✨__](https://boosty.to/kramar1337)
