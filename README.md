@@ -52,7 +52,7 @@ WindowFocus = ahk_class UnrealWindow
 </details>
 
 <details>
-<summary>:memo:__Как запустить?:__:memo:</summary>
+<summary>:memo:Как запустить?::memo:</summary>
 
 1. Скачать и установить [Autohotkey.com](https://www.autohotkey.com/download/ahk-install.exe)
 
