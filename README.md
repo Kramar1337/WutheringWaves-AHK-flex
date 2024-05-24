@@ -15,8 +15,8 @@ Z - Скип диалогов
 V - Macro Key
 Numpad 0 - Off
 Numpad 1 - AutoAttack
-Numpad 2 - Чися рейдж
-Numpad 3 - Банихоп
+Numpad 2 - Chixia rage
+Numpad 3 - Bhop
 ```
 
 <details>
