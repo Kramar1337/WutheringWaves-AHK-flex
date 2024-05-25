@@ -1,21 +1,42 @@
 ﻿/*
 ====================Wuthering Waves AHK by Kramar1337================
 
+F2 - Карта
 T - Спам паутинки
 F - Фастлут
 Z - Скип диалогов
 V - Macro Key
 Numpad 0 - Off
 Numpad 1 - AutoAttack
-Numpad 2 - Чися рейдж
-Numpad 3 - Банихоп
+Numpad 2 - Chixia rage
+Numpad 3 - Bhop
+Numpad 4 - Sanhua hold
 
 
 
 Запланировано:
+Оверлей с инфой по закупу
+Перенос настроек в конфиг
+Другие пистолетчики
+
+
+
+Изменения: 25.05.2024
+ - Подкрутки таймингов
+ - Бинд на карту
+ - Numpad 4 - Sanhua hold
+
 
 Изменения: 22.05.2024
  - Начало положено
+ - T - Спам паутинки
+ - F - Фастлут
+ - Z - Скип диалогов
+ - V - Macro Key
+ - Numpad 0 - Off
+ - Numpad 1 - AutoAttack
+ - Numpad 2 - Chixia rage
+ - Numpad 3 - Bhop
 
 
 
@@ -29,6 +50,7 @@ H:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\Client-Win64-Shipp
 
 
 ;========Бинды
+key_Map := "F2"
 key_Pautinka := "T"
 key_Macro := "V"
 key_SkipNPC := "Z"
@@ -40,22 +62,26 @@ key_LabelNumpad0 := "Numpad0"
 key_LabelNumpad1 := "Numpad1"
 key_LabelNumpad2 := "Numpad2"
 key_LabelNumpad3 := "Numpad3"
+key_LabelNumpad4 := "Numpad4"
 
 
 ;========Вкл-выкл
+Checkbox_Map = 1
 Checkbox_Pautinka = 1
 Checkbox_Macro = 1
 Checkbox_SkipNPC = 1
 Checkbox_Fastlyt = 1
 Checkbox_PauseSuspend = 0
-Checkbox_Reload = 0
+Checkbox_Reload = 1
 
 
 ;========Прочие настройки
 SelectDefaultMacro = 2
 SkipNPCLockMode = 1
+PautinkaDelayIn = 180
 BhopDelayIn = 100
 FastlytDelayIn = 130
+MapRunUrl = https://genshin-impact-map.appsample.com/wuthering-waves-map
 WindowFocus = ahk_class UnrealWindow
 
 
@@ -148,6 +174,8 @@ if Checkbox_PauseSuspend
 	Hotkey, *~$%key_PauseSuspend%, MetkaMenu3, on
 if Checkbox_Reload
 	Hotkey, *~$%key_Reload%, MetkaMenu4, on
+if Checkbox_Map
+Hotkey, %key_Map%, Label_Map, on
 
 if Checkbox_Macro
 {
@@ -156,7 +184,7 @@ if Checkbox_Macro
 	Hotkey, *~$%key_LabelNumpad1%, LabelNumpad1, on
 	Hotkey, *~$%key_LabelNumpad2%, LabelNumpad2, on
 	Hotkey, *~$%key_LabelNumpad3%, LabelNumpad3, on
-	; Hotkey, *~$%key_LabelNumpad4%, LabelNumpad4, on
+	Hotkey, *~$%key_LabelNumpad4%, LabelNumpad4, on
 	; Hotkey, *~$%key_LabelNumpad5%, LabelNumpad5, on
 	; Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
 	; Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
@@ -166,8 +194,19 @@ if Checkbox_Macro
 
 Hotkey, *~$%key_EndExitapp%, MetkaMenu1, on
 
+;=============================Получить список "GroupNameMap.txt" и распределить
+FileRead, GroupNameMapVar, %A_ScriptDir%\data\GroupNameMap.txt
+Loop, parse, GroupNameMapVar, `n, `r
+{
+	VarLoop1:=A_LoopField
+	VarLoop1 := RegExReplace(VarLoop1, "mi);.*", "")
+	if (VarLoop1 != "")
+	GroupAdd, GroupNameMap, %VarLoop1%
+}
+
 ; ClaudiaVar = 300
 Return
+
 
 
 
@@ -203,8 +242,8 @@ if jopa2
 	Goto Label_Goto_Chixia_Rage
 if jopa3
 	Goto Label_Goto_Bhop
-; if jopa4
-	; Goto Label_Goto
+if jopa4
+	Goto Label_Goto_Sanhua
 ; if jopa5
 	; Goto Label_Goto
 ; if jopa6
@@ -255,6 +294,51 @@ ToolTip, Bhop, 0, 0
 sleep 500
 ToolTip
 Return
+;===============================Sanhua hold
+LabelNumpad4:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa4:=true
+ToolTip, Sanhua hold, 0, 0
+sleep 500
+ToolTip
+Return
+
+
+;===============================Sanhua hold
+Label_Goto_Sanhua:
+
+startX := round(A_ScreenWidth * (1070 / 2560))
+startY := round(A_ScreenHeight * (1320 / 1440))
+endX := round(A_ScreenWidth * (1460 / 2560))
+endY := round(A_ScreenHeight * (1350 / 1440))
+blueColor := 0x96DCEC  ; blue
+whiteColor := 0xFFFFFF  ; white
+Loop 
+{
+	GetKeyState, StateA, vk1
+	if StateA = U
+		SendInput, {vk1 down}
+	GetKeyState, StateA, %key_Macro%, P
+    If StateA = U
+	{
+		SendInput, {vk1 up}
+        break
+	}
+    PixelSearch, foundX, foundY, startX, startY, endX, endY, blueColor, 20, Fast RGB
+    if (ErrorLevel = 0) 
+	{
+        PixelSearch,,, foundX-4, foundY-4, foundX+4, foundY+4, whiteColor, 0, Fast RGB
+		if (ErrorLevel = 0) 
+		{
+			SendInput, {vk1 up}
+			Sleep 450
+		}
+    }
+    Sleep 1
+}
+Return
 
 ;===============================Bhop отдельно
 Label_Goto_Bhop:
@@ -263,9 +347,9 @@ Loop
     GetKeyState, StateA, %key_Macro%, P
     If StateA = U
         break 
-    Sleep 50
+    Sleep 150
 	FuncRandomSleep()
-    SendInput, {vk20}
+    Send, {Blind}{Space}
 }
 Return
 
@@ -309,6 +393,22 @@ Loop
 Return
 
 
+;============================Карта
+Label_Map:
+Sleep 1
+Keywait %Label_Map%
+IfWinActive, %WindowFocus%
+{
+	IfWinNotExist, ahk_group GroupNameMap
+	{
+		Run, %MapRunUrl%
+		WinWait, ahk_group GroupNameMap, , 3
+	}
+	WinActivate ahk_group GroupNameMap
+}
+Else
+WinActivate %WindowFocus%
+Return
 
 ;============================Скип диалогов NPC
 Label_SkipNPC:
@@ -374,28 +474,11 @@ FuncRandomSleep()
 Click %xSkip4% %ySkip4%
 Return
 
-;============================Банихоп бхоп bhop bunnyhop
-Label_bhop:
-Sleep %BhopDelayIn%
-IfWinNotActive, %WindowFocus%
-	Return
-if FuncCursorVisible()
-	Return
-Loop
-{
-    GetKeyState, SpaceVar, vk20, P
-    If SpaceVar = U
-        break
-	SendInput {Blind}{vk20} 	;Space
-	sleep 50
-	FuncRandomSleep()
-}
-Return
 
 
 ;============================Спам паутинки
 Label_Pautinka:
-Sleep 100
+Sleep %PautinkaDelayIn%
 IfWinNotActive, %WindowFocus%
 	Return
 if FuncCursorVisible()
