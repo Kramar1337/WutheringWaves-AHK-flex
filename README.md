@@ -47,11 +47,9 @@ Numpad 5 - Auto pistols
 <details>
 <summary> 🛠️ Настройки 🛠️ </summary>
 
-Чтобы изменить настройки скрипта: 
+Или искать кфг "WutheringWaves-AHK-flex\data\Config.ini"
 
-Или "WutheringWaves-AHK-flex\data\Config.ini"
-
-Или "Трей меню => Edit Config"
+Или через меню "Трей меню => Edit Config"
 
 ```
 ;================Горячие клавиши
