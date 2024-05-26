@@ -1,4 +1,4 @@
-# WutheringWaves AHK flex v1.001
+# WutheringWaves AHK flex v1.1
 
 AHK скрипт для Wuthering Waves.
 
@@ -11,6 +11,24 @@ AHK скрипт для Wuthering Waves.
 [__✨Boosty✨__](https://boosty.to/kramar1337)
 [__✨SteamTrade✨__](https://steamcommunity.com/tradeoffer/new/?partner=176456946&token=QbYR9jmE)
 
+__🚀Функционал:🚀__
+
+- Скип диалогов
+- Фастлут
+- Спам паутинки
+- Карта
+- Макросы:
+  + AutoAttack
+  + Chixia rage
+  + Bhop
+  + Sanhua hold
+  + Auto pistols
+- Трей меню:
+  + Редактирование настроек
+  + Полуавтоматическое обновление
+  + Ручной импорт настроек
+  + Создание ярлыка
+
 :musical_keyboard:__Горячие клавиши:__:musical_keyboard:
 ```
 F2 - Карта
@@ -22,42 +40,52 @@ Numpad 0 - Off
 Numpad 1 - AutoAttack
 Numpad 2 - Chixia rage
 Numpad 3 - Bhop
-Numpad 4 - Sanhua hold
+Numpad 4 - Sanhua hold++
+Numpad 5 - Auto pistols
 ```
 
 <details>
 <summary> 🛠️ Настройки 🛠️ </summary>
 
-Чтобы изменить настройки скрипта: открой "WWFlex.ahk" через блокнот.
+Чтобы изменить настройки скрипта: 
+
+Или "WutheringWaves-AHK-flex\data\Config.ini"
+
+Или "Трей меню => Edit Config"
 
 ```
-key_Map := "F2"
-key_Pautinka := "T"
-key_Macro := "V"
-key_SkipNPC := "Z"
-key_Fastlyt := "F"
-key_EndExitapp := "End"
-key_PauseSuspend := "Del"
-key_Reload := "Home"
-key_LabelNumpad0 := "Numpad0"
-key_LabelNumpad1 := "Numpad1"
-key_LabelNumpad2 := "Numpad2"
-key_LabelNumpad3 := "Numpad3"
-key_LabelNumpad4 := "Numpad4"
-Checkbox_Map = 1
-Checkbox_Pautinka = 1
-Checkbox_Macro = 1
-Checkbox_SkipNPC = 1
-Checkbox_Fastlyt = 1
-Checkbox_PauseSuspend = 0
-Checkbox_Reload = 1
-SelectDefaultMacro = 2
-SkipNPCLockMode = 1
-PautinkaDelayIn = 180
-BhopDelayIn = 100
-FastlytDelayIn = 130
-MapRunUrl = https://genshin-impact-map.appsample.com/wuthering-waves-map
-WindowFocus = ahk_class UnrealWindow
+;================Горячие клавиши
+key_Map=F2
+key_Pautinka=T
+key_Macro=V
+key_SkipNPC=Z
+key_Fastlyt=F
+key_EndExitapp=End
+key_PauseSuspend=Del
+key_Reload=Home
+key_LabelNumpad0=Numpad0
+key_LabelNumpad1=Numpad1
+key_LabelNumpad2=Numpad2
+key_LabelNumpad3=Numpad3
+key_LabelNumpad4=Numpad4
+key_LabelNumpad5=Numpad5
+;================Вкл-выкл
+Checkbox_Map=1
+Checkbox_Pautinka=1
+Checkbox_Macro=1
+Checkbox_SkipNPC=1
+Checkbox_Fastlyt=1
+Checkbox_PauseSuspend=0
+Checkbox_Reload=1
+;================Прочее
+SelectDefaultMacro=2
+SkipNPCLockMode=1
+PautinkaDelayIn=180
+BhopDelayIn=100
+FastlytFastMode=1
+FastlytDelayIn=130
+MapRunUrl=https://genshin-impact-map.appsample.com/wuthering-waves-map
+WindowFocus=ahk_class UnrealWindow
 ```
 
 </details>
@@ -78,6 +106,17 @@ WindowFocus = ahk_class UnrealWindow
 
 <details>
 <summary> 📃 Список изменений 📃 </summary>
+
+Изменения: 26.05.2024
+
+ - Подкрутка фастлута
+ - Numpad 5 - Auto pistols
+ - Sanhua hold ++
+ - Esc - Прервать залипший поток
+ - Открывашка настроек в трей меню
+ - Перенос настроек в конфиг
+ - Импорт настроек в трей меню
+ - Обновлятор в трей меню
 
 Изменения: 25.05.2024
 
