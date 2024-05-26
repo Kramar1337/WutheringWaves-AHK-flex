@@ -1,4 +1,4 @@
-# WutheringWaves AHK flex v1.0
+# WutheringWaves AHK flex v1.001
 
 AHK скрипт для Wuthering Waves.
 
@@ -13,6 +13,7 @@ AHK скрипт для Wuthering Waves.
 
 :musical_keyboard:__Горячие клавиши:__:musical_keyboard:
 ```
+F2 - Карта
 T - Спам паутинки
 F - Фастлут
 Z - Скип диалогов
@@ -21,6 +22,7 @@ Numpad 0 - Off
 Numpad 1 - AutoAttack
 Numpad 2 - Chixia rage
 Numpad 3 - Bhop
+Numpad 4 - Sanhua hold
 ```
 
 <details>
@@ -29,6 +31,7 @@ Numpad 3 - Bhop
 Чтобы изменить настройки скрипта: открой "WWFlex.ahk" через блокнот.
 
 ```
+key_Map := "F2"
 key_Pautinka := "T"
 key_Macro := "V"
 key_SkipNPC := "Z"
@@ -40,16 +43,20 @@ key_LabelNumpad0 := "Numpad0"
 key_LabelNumpad1 := "Numpad1"
 key_LabelNumpad2 := "Numpad2"
 key_LabelNumpad3 := "Numpad3"
+key_LabelNumpad4 := "Numpad4"
+Checkbox_Map = 1
 Checkbox_Pautinka = 1
 Checkbox_Macro = 1
 Checkbox_SkipNPC = 1
 Checkbox_Fastlyt = 1
 Checkbox_PauseSuspend = 0
-Checkbox_Reload = 0
+Checkbox_Reload = 1
 SelectDefaultMacro = 2
 SkipNPCLockMode = 1
+PautinkaDelayIn = 180
 BhopDelayIn = 100
 FastlytDelayIn = 130
+MapRunUrl = https://genshin-impact-map.appsample.com/wuthering-waves-map
 WindowFocus = ahk_class UnrealWindow
 ```
 
@@ -67,4 +74,28 @@ WindowFocus = ahk_class UnrealWindow
 
 3. Запустить "WWFlex.ahk"
 
+</details>
+
+<details>
+<summary> 📃 Список изменений 📃 </summary>
+
+Изменения: 25.05.2024
+
+ - Подкрутки таймингов
+ - Бинд на карту
+ - Numpad 4 - Sanhua hold
+
+
+Изменения: 22.05.2024
+
+ - Начало положено
+ - T - Спам паутинки
+ - F - Фастлут
+ - Z - Скип диалогов
+ - V - Macro Key
+ - Numpad 0 - Off
+ - Numpad 1 - AutoAttack
+ - Numpad 2 - Chixia rage
+ - Numpad 3 - Bhop
+  
 </details>
