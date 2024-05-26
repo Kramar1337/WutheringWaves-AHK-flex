@@ -105,6 +105,11 @@ WindowFocus=ahk_class UnrealWindow
 </details>
 
 <details>
+<summary>📃 Подробное описание 📃</summary>
+Пусто
+</details>
+
+<details>
 <summary> 📃 Список изменений 📃 </summary>
 
 Изменения: 26.05.2024
