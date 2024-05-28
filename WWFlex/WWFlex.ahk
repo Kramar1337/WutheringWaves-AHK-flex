@@ -2,6 +2,7 @@
 ====================Wuthering Waves AHK by Kramar1337================
 
 Esc - Прервать
+F1 - Оверлей
 F2 - Карта
 T - Спам паутинки
 F - Фастлут
@@ -18,13 +19,16 @@ Numpad 5 - Auto pistols
 
 Запланировано:
 Лого при запуске
-Оверлей с инфой по закупу
 Безопасность, хешченжер, неймченжер
-Обновлятор в трей меню
 
 
 
 
+
+Изменения: 28.05.2024
+ - Подкрутка скипа диалогов
+ - Подкрутка Чиси для чела
+ - Оверлей с инфой
 
 Изменения: 26.05.2024
 
@@ -57,6 +61,8 @@ Numpad 5 - Auto pistols
 
 
 
+
+4-3-3-1-1 = 12
 Wuthering Waves  
 ahk_class UnrealWindow
 ahk_exe Client-Win64-Shipping.exe
@@ -64,7 +70,7 @@ H:\Wuthering Waves\Wuthering Waves Game\Wuthering Waves.exe
 H:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\Client-Win64-Shipping.exe
 */
 
-
+IniRead, key_Overlay, data\Config.ini, Settings, key_Overlay
 IniRead, key_Map, data\Config.ini, Settings, key_Map
 IniRead, key_Pautinka, data\Config.ini, Settings, key_Pautinka
 IniRead, key_Macro, data\Config.ini, Settings, key_Macro
@@ -80,6 +86,7 @@ IniRead, key_LabelNumpad3, data\Config.ini, Settings, key_LabelNumpad3
 IniRead, key_LabelNumpad4, data\Config.ini, Settings, key_LabelNumpad4
 IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
 
+IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
 IniRead, Checkbox_Map, data\Config.ini, Settings, Checkbox_Map
 IniRead, Checkbox_Pautinka, data\Config.ini, Settings, Checkbox_Pautinka
 IniRead, Checkbox_Macro, data\Config.ini, Settings, Checkbox_Macro
@@ -190,7 +197,9 @@ if Checkbox_PauseSuspend
 if Checkbox_Reload
 	Hotkey, *~$%key_Reload%, MetkaMenu4, on
 if Checkbox_Map
-Hotkey, %key_Map%, Label_Map, on
+	Hotkey, %key_Map%, Label_Map, on
+if Checkbox_Overlay
+	Hotkey, %key_Overlay%, Label_Overlay, on
 
 if Checkbox_Macro
 {
@@ -219,8 +228,24 @@ Loop, parse, GroupNameMapVar, `n, `r
 	GroupAdd, GroupNameMap, %VarLoop1%
 }
 
-; SleepVarRange = 900
+;===============================Оверлей создание
+OverlaySt = 1
+OverlayStList = 3
+Random, RandomVar1, 33, 35
+RandomNameOverlay := gen_password(RandomVar1)	
+Gui, 99: +AlwaysOnTop +ToolWindow -Caption +LastFound -DPIScale
+Gui, 99: Color, 0x000000
+Gui, 99: Add, Picture, w%A_ScreenWidth% h%A_ScreenHeight% x0 y0 vMyPictureVar1, data\Overlay1.png
+Gui, 99: Show, Hide w%A_ScreenWidth% h%A_ScreenHeight% x0 y0, %RandomNameOverlay%
+hwndGuihamdlewindow := WinExist()
+Gui, 99: Cancel
+
+
+
+
+; SleepVarRange = 290
 Return
+
 
 
 ; *~$X::
@@ -232,14 +257,14 @@ Return
     ; If StateA = U
         ; break 
 	; SendInput {vk1 down}
-	; Sleep 260
+	; sleep 250
 	; SendInput {vk1 up}
-	; Sleep 1
+	; Sleep %SleepVarRange%
 ; }
 ; Return
 
 
-;============================Калибровочка
+; ============================Калибровочка
 ; *~$Up::
 ; IfWinNotActive, %WindowFocus%
 	; Return
@@ -253,7 +278,52 @@ Return
 ; Tooltip % "Delay - " SleepVarRange,round(A_ScreenWidth * .5),0
 ; Return
 
+;===============================Оверлей с подсказками
+Label_Overlay:
+sleep 50
+Keywait %key_Overlay%
+Overlay1Toggle := !Overlay1Toggle
+if (Overlay1Toggle)
+	Gui, 99: Show
+else
+	Gui, 99: Cancel
+Return
 
+;======================================Переключение оверлея Left - Right
+*~$Left::
+Keywait Left
+IfWinNotExist, ahk_id %hwndGuihamdlewindow%
+Return
+if Overlay1Toggle
+{
+	OverlaySt -= 1
+	if (OverlaySt < 1)
+	{
+		OverlaySt := 1
+		Return
+	}
+	GuiControl, 99: -Redraw, MyPictureVar1
+	GuiControl, 99: ,MyPictureVar1, data\Overlay%OverlaySt%.png
+	GuiControl, 99: +Redraw, MyPictureVar1
+}
+Return
+*~$Right::
+Keywait Right
+IfWinNotExist, ahk_id %hwndGuihamdlewindow%
+Return
+if Overlay1Toggle
+{
+	OverlaySt += 1
+	if (OverlaySt > OverlayStList)
+	{
+		OverlaySt := OverlayStList
+		Return
+	}
+	GuiControl, 99: -Redraw, MyPictureVar1
+	GuiControl, 99: ,MyPictureVar1, data\Overlay%OverlaySt%.png
+	GuiControl, 99: +Redraw, MyPictureVar1
+}
+Return
 
 ;============================Макросы
 Metkakey_macro:
@@ -460,15 +530,44 @@ Return
 ;==========Чися рейдж========================
 Label_Goto_Chixia_Rage:
 Sleep 1
+
+red := 0xFF0000
+dark_red := 0x871B15
+delta := 12
+
+WinGet, hWndVar1, ID, %WindowFocus%
+VarSetCapacity(rect, 16)
+DllCall("GetClientRect", "Ptr", hWndVar1, "Ptr", &rect)
+WidthVar1 := NumGet(rect, 8, "Int")
+HeightVar1 := NumGet(rect, 12, "Int")
+if DetermineAspectRatio(WidthVar1, HeightVar1) = "16:10" {
+	xPix := round(A_ScreenWidth * (1323 / 1920))
+	yPix := round(A_ScreenHeight * (1101 / 1200))
+}
+else if DetermineAspectRatio(WidthVar1, HeightVar1) = "16:9" {
+	xPix := round(A_ScreenWidth * (1757 / 2560))
+	yPix := round(A_ScreenHeight * (1300 / 1440))
+}
+else {
+	xPix := round(A_ScreenWidth * (1757 / 2560))
+	yPix := round(A_ScreenHeight * (1300 / 1440))
+}
+
+PixelGetColor, GetPix, xPix, yPix, RGB
+if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
+{
+	SendInput {vk47}
+	Sleep 50
+}
+
 Loop
 {
     GetKeyState, StateA, %key_Macro%, P
     If StateA = U
 	{
 		Sleep 80
-		xPix:=round(A_ScreenWidth * (1757 / 2560)), yPix:=round(A_ScreenHeight * (1300 / 1440))
 		PixelGetColor, GetPix, xPix, yPix, RGB
-		if (GetPix = 0xFF0000 || GetPix = 0xFD0000 || GetPix = 0xFC0101)
+		if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
 		{
 			SendInput {vk47} 	;G vk47
 		}
@@ -488,7 +587,7 @@ Return
 ;============================Карта
 Label_Map:
 Sleep 1
-Keywait %Label_Map%
+Keywait %Key_Map%
 IfWinActive, %WindowFocus%
 {
 	IfWinNotExist, ahk_group GroupNameMap
@@ -529,8 +628,6 @@ Else
 {
 	Loop
 	{
-		if !FuncCursorVisible()
-			break
 		GetKeyState, SpaceVar, %key_SkipNPC%, P
 		If SpaceVar = U
 			break
@@ -549,9 +646,14 @@ Return
 ;============================SetTimer Скип диалогов
 TimerNpcSkip:
 Sleep 100
-if ((!FuncCursorVisible() || !WinActive(WindowFocus)) || (A_PriorKey != key_SkipNPC))
+if ((!FuncCursorVisible() || !WinActive(WindowFocus)) || (GetKeyVK(A_PriorKey) != GetKeyVK(key_SkipNPC)))
 {
-; msgbox 1
+	; if !FuncCursorVisible()
+	; Tooltip 1
+	; if !WinActive(WindowFocus)
+	; Tooltip 2
+	; if (GetKeyVK(A_PriorKey) != GetKeyVK(key_SkipNPC))
+	; Tooltip %A_PriorKey%`n%key_SkipNPC%
 	Toggle1SkipNPC := !Toggle1SkipNPC
 	SetTimer, TimerNpcSkip, off
 	Tooltip,,0,0,2
@@ -668,6 +770,33 @@ FuncCursorVisible()
 	Else
 		CursorVisible := 0
 	Return CursorVisible
+}
+
+ColorRGBCompare(col1, col2, d) {
+	col1 := RGBfromColor(col1)
+	col2 := RGBfromColor(col2)
+	return (Abs(col1.r - col2.r) <= d) && (Abs(col1.g - col2.g) <= d) && (Abs(col1.r - col2.r) <= d)
+}
+
+RGBfromColor(color) {
+	return {r: (0xFF0000 & color) >> 16, g: (0xFF00 & color) >> 8, b: 0xFF & color}
+}
+
+DetermineAspectRatio(width, height) {
+    ratio := width / height
+    rounded_ratio := Round(ratio, 2) ; Округляем до двух знаков после запятой
+    if (Abs(rounded_ratio - (16/9)) < 0.01) {
+        aspect_ratio := "16:9"
+    } else if (Abs(rounded_ratio - (16/10)) < 0.01) {
+        aspect_ratio := "16:10"
+    } else if (Abs(rounded_ratio - (4/3)) < 0.01) {
+        aspect_ratio := "4:3"
+    } else if (Abs(rounded_ratio - (21/9)) < 0.01) {
+        aspect_ratio := "21:9"
+    } else {
+        aspect_ratio := "нестандартное"
+    }
+    Return %aspect_ratio%
 }
 
 ;============================Меню, Reload
@@ -824,6 +953,8 @@ Return
 
 *~$Esc::
 Keywait Esc
+if (Overlay1Toggle)
+Gui, 99: Cancel
 Exit
 Return
 
