@@ -57,7 +57,7 @@ Numpad 8 - *DanjinE1 (Описание*)
 <details>
 <summary> 🛠️ Настройки 🛠️ </summary>
 
-Или искать кфг "WutheringWaves-AHK-flex\data\Config.ini"
+Или искать кфг "WWFlex\data\Config.ini"
 
 Или через меню "Трей меню => Edit Config"
 
