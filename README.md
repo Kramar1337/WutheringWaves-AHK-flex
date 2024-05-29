@@ -1,4 +1,4 @@
-# WutheringWaves AHK flex v1.2
+# WutheringWaves AHK flex v1.3
 
 AHK скрипт для Wuthering Waves.
 
@@ -26,6 +26,9 @@ __🚀Функционал:🚀__
   + Bhop
   + Sanhua hold
   + Auto pistols
+  + EncoreN1
+  + RoverHavocN1
+  + DanjinE1
 - Трей меню:
   + Редактирование настроек
   + Полуавтоматическое обновление
@@ -37,7 +40,6 @@ __🚀Функционал:🚀__
 End - Завершить работу
 F1 - Оверлей
 F2 - Карта
-T - Спам паутинки
 F - Фастлут
 Z - Скип диалогов
 V - Macro Key
@@ -47,6 +49,9 @@ Numpad 2 - Chixia rage
 Numpad 3 - Bhop
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
+Numpad 6 - *EncoreN1 (Описание*)
+Numpad 7 - *RoverHavocN1 (Описание*)
+Numpad 8 - *DanjinE1 (Описание*)
 ```
 
 <details>
@@ -58,9 +63,10 @@ Numpad 5 - Auto pistols
 
 ```
 ;================Горячие клавиши
+Key_ESkillDefault=vk45
+Key_RelicDefault=vk54
 key_Overlay=F1
 key_Map=F2
-key_Pautinka=T
 key_Macro=V
 key_SkipNPC=Z
 key_Fastlyt=F
@@ -73,19 +79,22 @@ key_LabelNumpad2=Numpad2
 key_LabelNumpad3=Numpad3
 key_LabelNumpad4=Numpad4
 key_LabelNumpad5=Numpad5
+key_LabelNumpad6=Numpad6
+key_LabelNumpad7=Numpad7
+key_LabelNumpad8=Numpad8
 ;================Вкл-выкл
 Checkbox_Overlay=1
 Checkbox_Map=1
-Checkbox_Pautinka=1
 Checkbox_Macro=1
 Checkbox_SkipNPC=1
 Checkbox_Fastlyt=1
 Checkbox_PauseSuspend=0
 Checkbox_Reload=1
 ;================Прочее
+RoverHavocTime1=60
+EncoreTime1=43
 SelectDefaultMacro=2
 SkipNPCLockMode=1
-PautinkaDelayIn=180
 BhopDelayIn=100
 FastlytFastMode=1
 FastlytDelayIn=130
@@ -150,8 +159,6 @@ F - Фастлут.
 
 0 - Обычный режим.
 
-T - Спам паутинки. Спамит кнопку "T". В "data\Config.ini" параметр "PautinkaDelayIn" регулирует задержку срабатывания.
-
 V - Macro Key.
 
 Активирует макрос. Выбранный ниже. В "data\Config.ini" параметр "SelectDefaultMacro" выбирает активный макрос по умолчанию.
@@ -168,6 +175,14 @@ Numpad 4 - Sanhua hold++ - Отжимает холд тычки в таймин�
 
 Numpad 5 - Auto pistols - Быстрая стрельба на любых пистолетчиках, для драки не годится, имеет смысл для микроголоволомочек.
 
+Numpad 6 - *EncoreN1
+
+Numpad 7 - *RoverHavocN1
+
+Numpad 8 - *DanjinE1
+
+*Добраться до 25 Ранга приключения, выполнить весь квест "Stygian Lacrimosa" , экипировать релик "Ultrasonic Pulse Chip".
+
 End - Завершить работу
 
 Del - Приостановить. По умолчанию отключено. "data\Config.ini" параметр "Checkbox_PauseSuspend"
@@ -178,6 +193,13 @@ Home - Перезапуск. По умолчанию отключено."data\Co
 
 <details>
 <summary> 📃 Список изменений 📃 </summary>
+
+Изменения: 29.05.2024
+
+ - Спам паутинки фулл хня
+ - Numpad 6 - EncoreN1 (Описание*)
+ - Numpad 7 - RoverHavoc N1 (Описание*)
+ - Numpad 8 - Danjin E1 (Описание*)
 
 Изменения: 28.05.2024
 
