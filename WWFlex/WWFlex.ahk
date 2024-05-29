@@ -4,7 +4,6 @@
 Esc - Прервать
 F1 - Оверлей
 F2 - Карта
-T - Спам паутинки
 F - Фастлут
 Z - Скип диалогов
 V - Macro Key
@@ -14,6 +13,10 @@ Numpad 2 - Chixia rage
 Numpad 3 - Bhop
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
+Numpad 6 - *EncoreN1 (Описание*)
+Numpad 7 - *RoverHavocN1 (Описание*)
+Numpad 8 - *DanjinE1 (Описание*)
+
 
 
 
@@ -23,7 +26,11 @@ Numpad 5 - Auto pistols
 
 
 
-
+Изменения: 29.05.2024
+ - Спам паутинки фулл хня
+ - Numpad 6 - *EncoreN1 (Описание*)
+ - Numpad 7 - *RoverHavoc N1 (Описание*)
+ - Numpad 8 - *Danjin E1 (Описание*)
 
 Изменения: 28.05.2024
  - Подкрутка скипа диалогов
@@ -70,39 +77,6 @@ H:\Wuthering Waves\Wuthering Waves Game\Wuthering Waves.exe
 H:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\Client-Win64-Shipping.exe
 */
 
-IniRead, key_Overlay, data\Config.ini, Settings, key_Overlay
-IniRead, key_Map, data\Config.ini, Settings, key_Map
-IniRead, key_Pautinka, data\Config.ini, Settings, key_Pautinka
-IniRead, key_Macro, data\Config.ini, Settings, key_Macro
-IniRead, key_SkipNPC, data\Config.ini, Settings, key_SkipNPC
-IniRead, key_Fastlyt, data\Config.ini, Settings, key_Fastlyt
-IniRead, key_EndExitapp, data\Config.ini, Settings, key_EndExitapp
-IniRead, key_PauseSuspend, data\Config.ini, Settings, key_PauseSuspend
-IniRead, key_Reload, data\Config.ini, Settings, key_Reload
-IniRead, key_LabelNumpad0, data\Config.ini, Settings, key_LabelNumpad0
-IniRead, key_LabelNumpad1, data\Config.ini, Settings, key_LabelNumpad1
-IniRead, key_LabelNumpad2, data\Config.ini, Settings, key_LabelNumpad2
-IniRead, key_LabelNumpad3, data\Config.ini, Settings, key_LabelNumpad3
-IniRead, key_LabelNumpad4, data\Config.ini, Settings, key_LabelNumpad4
-IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
-
-IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
-IniRead, Checkbox_Map, data\Config.ini, Settings, Checkbox_Map
-IniRead, Checkbox_Pautinka, data\Config.ini, Settings, Checkbox_Pautinka
-IniRead, Checkbox_Macro, data\Config.ini, Settings, Checkbox_Macro
-IniRead, Checkbox_SkipNPC, data\Config.ini, Settings, Checkbox_SkipNPC
-IniRead, Checkbox_Fastlyt, data\Config.ini, Settings, Checkbox_Fastlyt
-IniRead, Checkbox_PauseSuspend, data\Config.ini, Settings, Checkbox_PauseSuspend
-IniRead, Checkbox_Reload, data\Config.ini, Settings, Checkbox_Reload
-
-IniRead, SelectDefaultMacro, data\Config.ini, Settings, SelectDefaultMacro
-IniRead, SkipNPCLockMode, data\Config.ini, Settings, SkipNPCLockMode
-IniRead, PautinkaDelayIn, data\Config.ini, Settings, PautinkaDelayIn
-IniRead, BhopDelayIn, data\Config.ini, Settings, BhopDelayIn
-IniRead, FastlytFastMode, data\Config.ini, Settings, FastlytFastMode
-IniRead, FastlytDelayIn, data\Config.ini, Settings, FastlytDelayIn
-IniRead, MapRunUrl, data\Config.ini, Settings, MapRunUrl
-IniRead, WindowFocus, data\Config.ini, Settings, WindowFocus
 
 
 ; WinName:= "WWFlex v1 by Kramar1337"
@@ -123,6 +97,8 @@ SetMouseDelay, -1
 SetWinDelay,-1
 Menu,Tray, Icon, data\icon.ico, ,1
 
+
+
 CommandLine := DllCall("GetCommandLine", "Str")
 If !(A_IsAdmin || RegExMatch(CommandLine, " /restart(?!\S)")) 
 {
@@ -135,6 +111,50 @@ If !(A_IsAdmin || RegExMatch(CommandLine, " /restart(?!\S)"))
 	}
 	ExitApp
 }
+
+IniRead, Key_ESkillDefault, data\Config.ini, Settings, Key_ESkillDefault
+IniRead, Key_RelicDefault, data\Config.ini, Settings, Key_RelicDefault
+IniRead, key_Overlay, data\Config.ini, Settings, key_Overlay
+IniRead, key_Map, data\Config.ini, Settings, key_Map
+IniRead, key_Pautinka, data\Config.ini, Settings, key_Pautinka
+IniRead, key_Macro, data\Config.ini, Settings, key_Macro
+IniRead, key_SkipNPC, data\Config.ini, Settings, key_SkipNPC
+IniRead, key_Fastlyt, data\Config.ini, Settings, key_Fastlyt
+IniRead, key_EndExitapp, data\Config.ini, Settings, key_EndExitapp
+IniRead, key_PauseSuspend, data\Config.ini, Settings, key_PauseSuspend
+IniRead, key_Reload, data\Config.ini, Settings, key_Reload
+IniRead, key_LabelNumpad0, data\Config.ini, Settings, key_LabelNumpad0
+IniRead, key_LabelNumpad1, data\Config.ini, Settings, key_LabelNumpad1
+IniRead, key_LabelNumpad2, data\Config.ini, Settings, key_LabelNumpad2
+IniRead, key_LabelNumpad3, data\Config.ini, Settings, key_LabelNumpad3
+IniRead, key_LabelNumpad4, data\Config.ini, Settings, key_LabelNumpad4
+IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
+IniRead, key_LabelNumpad6, data\Config.ini, Settings, key_LabelNumpad6
+IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
+IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
+; IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
+
+
+IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
+IniRead, Checkbox_Map, data\Config.ini, Settings, Checkbox_Map
+IniRead, Checkbox_Pautinka, data\Config.ini, Settings, Checkbox_Pautinka
+IniRead, Checkbox_Macro, data\Config.ini, Settings, Checkbox_Macro
+IniRead, Checkbox_SkipNPC, data\Config.ini, Settings, Checkbox_SkipNPC
+IniRead, Checkbox_Fastlyt, data\Config.ini, Settings, Checkbox_Fastlyt
+IniRead, Checkbox_PauseSuspend, data\Config.ini, Settings, Checkbox_PauseSuspend
+IniRead, Checkbox_Reload, data\Config.ini, Settings, Checkbox_Reload
+
+
+IniRead, RoverHavocTime1, data\Config.ini, Settings, RoverHavocTime1
+IniRead, EncoreTime1, data\Config.ini, Settings, EncoreTime1
+IniRead, SelectDefaultMacro, data\Config.ini, Settings, SelectDefaultMacro
+IniRead, SkipNPCLockMode, data\Config.ini, Settings, SkipNPCLockMode
+IniRead, BhopDelayIn, data\Config.ini, Settings, BhopDelayIn
+IniRead, FastlytFastMode, data\Config.ini, Settings, FastlytFastMode
+IniRead, FastlytDelayIn, data\Config.ini, Settings, FastlytDelayIn
+IniRead, MapRunUrl, data\Config.ini, Settings, MapRunUrl
+IniRead, WindowFocus, data\Config.ini, Settings, WindowFocus
+
 
 Loop 30
 {
@@ -156,6 +176,7 @@ Menu,Tray, add, Pause-Play, MetkaMenu3
 Menu,Tray, Icon, Pause-Play, imageres.dll, 233, 16
 Menu,Tray, add, Edit Config, MetkaMenu5
 Menu,Tray, Icon, Edit Config, imageres.dll, 247, 16
+Menu,Tray, add
 Menu,Tray, add, Import Settings, MetkaMenu6
 Menu,Tray, Icon, Import Settings, imageres.dll, 262, 16
 Menu,Tray, add, Force Update, MetkaMenu7
@@ -187,8 +208,6 @@ if Checkbox_SkipNPC
 	Hotkey, *~$%key_SkipNPC%, Label_SkipNPC, on
 if Checkbox_Fastlyt
 	Hotkey, *~$%key_Fastlyt%, Label_Fastlyt, on
-if Checkbox_Pautinka
-	Hotkey, *~$%key_Pautinka%, Label_Pautinka, on
 Hotkey, IfWinActive
 
 
@@ -210,9 +229,9 @@ if Checkbox_Macro
 	Hotkey, *~$%key_LabelNumpad3%, LabelNumpad3, on
 	Hotkey, *~$%key_LabelNumpad4%, LabelNumpad4, on
 	Hotkey, *~$%key_LabelNumpad5%, LabelNumpad5, on
-	; Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
-	; Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
-	; Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
+	Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
+	Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
+	Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
 	; Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
 }
 
@@ -243,9 +262,14 @@ Gui, 99: Cancel
 
 
 
-; SleepVarRange = 290
+SleepVarRange = 70
 Return
 
+
+	; MouseClick, left
+	; Sleep, 1
+	; Send, vk54 ; Тут юзается Ultrasonic Pulse Chip
+	; Sleep, 80 ;
 
 
 ; *~$X::
@@ -256,22 +280,22 @@ Return
     ; GetKeyState, StateA, X, P
     ; If StateA = U
         ; break 
-	; SendInput {vk1 down}
-	; sleep 250
-	; SendInput {vk1 up}
+	; SendInput {vk1}
+	; sleep 1
+	; SendInput {%Key_RelicDefault%}
 	; Sleep %SleepVarRange%
 ; }
 ; Return
-
+; 30 дилюк
 
 ; ============================Калибровочка
-; *~$Up::
+; *~$PgUp::
 ; IfWinNotActive, %WindowFocus%
 	; Return
 ; SleepVarRange+=5
 ; Tooltip % "Delay - " SleepVarRange,round(A_ScreenWidth * .5),0
 ; Return
-; *~$Down::
+; *~$PgDn::
 ; IfWinNotActive, %WindowFocus%
 	; Return
 ; SleepVarRange-=5
@@ -342,12 +366,12 @@ if jopa4
 	Goto Label_Goto_Sanhua
 if jopa5
 	Goto Label_Goto_Auto_pistols
-; if jopa6
-	; Goto Label_Goto
-; if jopa7
-	; Goto Label_Goto
-; if jopa8
-	; Goto Label_Goto
+if jopa6
+	Goto Label_Goto_Encore
+if jopa7
+	Goto Label_Goto_Rover_Havoc
+if jopa8
+	Goto Label_Goto_Danjin
 ; if jopa9
 	; Goto Label_Goto
 Return
@@ -410,6 +434,79 @@ ToolTip, Auto pistols, 0, 0
 sleep 500
 ToolTip
 Return
+;===============================Encore Spam N1
+LabelNumpad6:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa6:=true
+ToolTip, Encore Spam N1, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================RoverHavoc N1
+LabelNumpad7:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa7:=true
+ToolTip, RoverHavoc N1, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Danjin N1
+LabelNumpad8:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa8:=true
+ToolTip, Danjin N1, 0, 0
+sleep 500
+ToolTip
+Return
+
+;===============================Danjin N1
+Label_Goto_Danjin:
+Loop
+{
+    GetKeyState, StateA, %key_Macro%, P
+    If StateA = U
+        break 
+	SendInput {%Key_ESkillDefault%}
+	sleep 15
+	SendInput {%Key_RelicDefault%}
+	Sleep 15
+}
+Return
+
+;===============================RoverHavoc N1
+Label_Goto_Rover_Havoc:
+Loop
+{
+    GetKeyState, StateA, %key_Macro%, P
+    If StateA = U
+        break 
+	SendInput {vk1}
+	sleep 1
+	SendInput {%Key_RelicDefault%}
+	Sleep %RoverHavocTime1%
+}
+Return
+
+
+;===============================Encore Spam N1
+Label_Goto_Encore:
+Loop
+{
+    GetKeyState, StateA, %key_Macro%, P
+    If StateA = U
+        break 
+	SendInput {vk1}
+	sleep 1
+	SendInput {%Key_RelicDefault%}
+	Sleep %EncoreTime1%
+}
+Return
 
 ;===============================Auto pistols
 Label_Goto_Auto_pistols:
@@ -461,7 +558,7 @@ Loop
 		break
 	}
 	SendInput, {vk1 up}
-	Sleep 395
+	Sleep 400
 }
 Return
 
@@ -668,25 +765,6 @@ FuncRandomSleep()
 Click %xSkip4% %ySkip4%
 Return
 
-
-
-;============================Спам паутинки
-Label_Pautinka:
-Sleep %PautinkaDelayIn%
-IfWinNotActive, %WindowFocus%
-	Return
-if FuncCursorVisible()
-	Return
-Loop
-{
-	GetKeyState, SpaceVar, %key_Pautinka%, P
-	If SpaceVar = U
-		break 
-	SendInput {Blind}{%key_Pautinka%}
-	sleep 100
-	FuncRandomSleep()
-}
-Return
 
 ;============================Фастлут
 Label_fastlyt:
