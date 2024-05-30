@@ -10,12 +10,13 @@ V - Macro Key
 Numpad 0 - Off
 Numpad 1 - AutoAttack
 Numpad 2 - Chixia rage
-Numpad 3 - Bhop
+Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
 Numpad 6 - *EncoreN1 (Описание*)
 Numpad 7 - *RoverHavocN1 (Описание*)
 Numpad 8 - *DanjinE1 (Описание*)
+Numpad 9 - High jump (Крюк + Любые мечники)
 
 
 
@@ -24,6 +25,18 @@ Numpad 8 - *DanjinE1 (Описание*)
 Лого при запуске
 Безопасность, хешченжер, неймченжер
 
+
+https://www.youtube.com/watch?v=Ef6ueBoUW0I
+прыжок
+лкм (ждем пик анимации когда герой поднимется выше)
+шифт (или пкм)
+лкм ещё раз
+крюк
+
+
+Изменения: 30.05.2024
+ - Numpad 3 - Shift Spam
+ - Numpad 9 - High jump
 
 
 Изменения: 29.05.2024
@@ -75,6 +88,7 @@ ahk_class UnrealWindow
 ahk_exe Client-Win64-Shipping.exe
 H:\Wuthering Waves\Wuthering Waves Game\Wuthering Waves.exe
 H:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\Client-Win64-Shipping.exe
+
 */
 
 
@@ -132,7 +146,7 @@ IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
 IniRead, key_LabelNumpad6, data\Config.ini, Settings, key_LabelNumpad6
 IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
 IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
-; IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
+IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
 
 
 IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
@@ -232,7 +246,7 @@ if Checkbox_Macro
 	Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
 	Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
 	Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
-	; Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
+	Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
 }
 
 Hotkey, *~$%key_EndExitapp%, MetkaMenu1, on
@@ -262,29 +276,33 @@ Gui, 99: Cancel
 
 
 
-SleepVarRange = 70
+SleepVarRange = 300
 Return
 
-
-	; MouseClick, left
-	; Sleep, 1
-	; Send, vk54 ; Тут юзается Ultrasonic Pulse Chip
-	; Sleep, 80 ;
 
 
 ; *~$X::
 ; IfWinNotActive, %WindowFocus%
 	; Return
-; Loop
-; {
-    ; GetKeyState, StateA, X, P
-    ; If StateA = U
-        ; break 
-	; SendInput {vk1}
-	; sleep 1
-	; SendInput {%Key_RelicDefault%}
-	; Sleep %SleepVarRange%
-; }
+; sleep 50
+; SendInput {vk20}
+; sleep 300
+; SendInput {vk1 down}
+; Sleep 100
+; SendInput {vk1 up}
+; Sleep 290
+; SendInput {vkA0}
+; Sleep 100
+; SendInput {vk1 down}
+; Sleep 100
+; SendInput {vk1 up}
+; Sleep 290
+; SendInput {vk54}
+; Sleep 200
+; SendInput {vk20}
+
+
+
 ; Return
 ; 30 дилюк
 
@@ -372,8 +390,8 @@ if jopa7
 	Goto Label_Goto_Rover_Havoc
 if jopa8
 	Goto Label_Goto_Danjin
-; if jopa9
-	; Goto Label_Goto
+if jopa9
+	Goto Label_Goto_High_jump
 Return
 ;===============================Off
 LabelNumpad0:
@@ -404,13 +422,13 @@ ToolTip, Chixia Rage, 0, 0
 sleep 500
 ToolTip
 Return
-;===============================Bhop
+;===============================Shift Spam
 LabelNumpad3:
 IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa3:=true
-ToolTip, Bhop, 0, 0
+ToolTip, Shift Spam, 0, 0
 sleep 500
 ToolTip
 Return
@@ -464,7 +482,40 @@ ToolTip, Danjin N1, 0, 0
 sleep 500
 ToolTip
 Return
+;===============================High jump
+LabelNumpad9:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa9:=true
+ToolTip, High jump, 0, 0
+sleep 500
+ToolTip
+Return
 
+
+
+
+
+;===============================High jump
+Label_Goto_High_jump:
+sleep 50
+SendInput {vk20}
+sleep 300
+SendInput {vk1 down}
+Sleep 100
+SendInput {vk1 up}
+Sleep 290
+SendInput {vkA0}
+Sleep 100
+SendInput {vk1 down}
+Sleep 100
+SendInput {vk1 up}
+Sleep 290
+SendInput {vk54}
+Sleep 200
+SendInput {vk20}
+Return
 ;===============================Danjin N1
 Label_Goto_Danjin:
 Loop
@@ -599,16 +650,19 @@ Loop
 Return
 */
 
-;===============================Bhop отдельно
+;===============================Shift Spam
 Label_Goto_Bhop:
 Loop
 {
     GetKeyState, StateA, %key_Macro%, P
     If StateA = U
         break 
-    Sleep 150
-	FuncRandomSleep()
-    Send, {Blind}{Space}
+	SendInput {vkA0}
+	Sleep 230
+    GetKeyState, StateA, %key_Macro%, P
+    If StateA = U
+        break
+	Sleep 300
 }
 Return
 
