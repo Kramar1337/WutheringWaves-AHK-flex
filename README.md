@@ -22,12 +22,13 @@ __🚀Функционал:🚀__
 - Макросы:
   + AutoAttack
   + Chixia rage
-  + Bhop
+  + Shift Spam
   + Sanhua hold
   + Auto pistols
   + EncoreN1
   + RoverHavocN1
   + DanjinE1
+  + High jump
 - Трей меню:
   + Редактирование настроек
   + Полуавтоматическое обновление
@@ -45,12 +46,13 @@ V - Macro Key
 Numpad 0 - Off
 Numpad 1 - AutoAttack
 Numpad 2 - Chixia rage
-Numpad 3 - Bhop
+Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
 Numpad 6 - *EncoreN1 (Описание*)
 Numpad 7 - *RoverHavocN1 (Описание*)
 Numpad 8 - *DanjinE1 (Описание*)
+Numpad 9 - High jump (Крюк + Любые мечники)
 ```
 
 <details>
@@ -81,6 +83,7 @@ key_LabelNumpad5=Numpad5
 key_LabelNumpad6=Numpad6
 key_LabelNumpad7=Numpad7
 key_LabelNumpad8=Numpad8
+key_LabelNumpad9=Numpad9
 ;================Вкл-выкл
 Checkbox_Overlay=1
 Checkbox_Map=1
@@ -168,7 +171,7 @@ Numpad 1 - AutoAttack - Спам автоатаки.
 
 Numpad 2 - Chixia rage - Абузит анимацию прицеливания, Чися стреляет очень быстро.
 
-Numpad 3 - Bhop - Спамит пробел, но в этой игре он бесполезен.
+Numpad 3 - Shift Spam - Спамит Shift
 
 Numpad 4 - Sanhua hold++ - Отжимает холд тычки в тайминг.
 
@@ -182,6 +185,8 @@ Numpad 8 - *DanjinE1
 
 *Добраться до 25 Ранга приключения, выполнить весь квест "Stygian Lacrimosa" , экипировать релик "Ultrasonic Pulse Chip".
 
+Numpad 9 - High jump (Крюк + Любые мечники), одиночное нажатие.
+
 End - Завершить работу
 
 Del - Приостановить. По умолчанию отключено. "data\Config.ini" параметр "Checkbox_PauseSuspend"
@@ -192,6 +197,11 @@ Home - Перезапуск. По умолчанию отключено."data\Co
 
 <details>
 <summary> 📃 Список изменений 📃 </summary>
+
+Изменения: 30.05.2024
+
+ - Numpad 3 - Shift Spam
+ - Numpad 9 - High jump
 
 Изменения: 29.05.2024
 
