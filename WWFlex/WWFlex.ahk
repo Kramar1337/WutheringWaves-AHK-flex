@@ -243,7 +243,7 @@ if Checkbox_Map
 if Checkbox_Overlay
 	Hotkey, %key_Overlay%, Label_Overlay, on
 if Checkbox_ZaWarudo
-	Hotkey, %Key_ZaWarudo%, Label_ZaWarudo, on
+	Hotkey, *~%Key_ZaWarudo%, Label_ZaWarudo, on
 
 if Checkbox_Macro
 {
@@ -334,6 +334,10 @@ Return
 ;===============================Остановить время
 Label_ZaWarudo:
 Sleep 50
+IfWinNotActive, %WindowFocus%
+	Return
+if FuncCursorVisible()
+	Return
 SendInput {%Key_RUltiDefault%} ;                 это ульта, она должна быть заряжена
 SendInput {vk9} ;   это выбор инструмента (таб)
 Sleep 200
