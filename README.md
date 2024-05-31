@@ -68,6 +68,10 @@ Numpad 9 - High jump (Крюк + Любые мечники)
 
 ```
 ;================Горячие клавиши
+; Можно использовать обычные названия клавиш.
+; https://www.autohotkey.com/docs/v1/KeyList.htm
+; Но рекомендуется использовать виртуальные или скан коды
+; Где их брать? Гуглить или запускай WWFlex\data\debug\VirtualCodeKeys.ahk
 Key_ZaWarudo=vkC0
 Key_RUltiDefault=vk51
 Key_ESkillDefault=vk45
