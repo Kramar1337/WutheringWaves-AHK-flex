@@ -1,7 +1,9 @@
 ﻿/*
 ====================Wuthering Waves AHK by Kramar1337================
 
+
 Esc - Прервать
+Ё - Za warudo (Остановить время) (Описание*)
 F1 - Оверлей
 F2 - Карта
 F - Фастлут
@@ -13,9 +15,9 @@ Numpad 2 - Chixia rage
 Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
-Numpad 6 - *EncoreN1 (Описание*)
-Numpad 7 - *RoverHavocN1 (Описание*)
-Numpad 8 - *DanjinE1 (Описание*)
+Numpad 6 - EncoreN1 (Описание*)
+Numpad 7 - RoverHavocN1 (Описание*)
+Numpad 8 - DanjinE1 (Описание*)
 Numpad 9 - High jump (Крюк + Любые мечники)
 
 
@@ -33,6 +35,9 @@ https://www.youtube.com/watch?v=Ef6ueBoUW0I
 лкм ещё раз
 крюк
 
+
+Изменения: 30.05.2024
+ - `(тильт) - Za warudo (Накопить ульту и остановить время)
 
 Изменения: 30.05.2024
  - Numpad 3 - Shift Spam
@@ -126,6 +131,9 @@ If !(A_IsAdmin || RegExMatch(CommandLine, " /restart(?!\S)"))
 	ExitApp
 }
 
+
+IniRead, Key_RUltiDefault, data\Config.ini, Settings, Key_RUltiDefault
+IniRead, Key_ZaWarudo, data\Config.ini, Settings, Key_ZaWarudo
 IniRead, Key_ESkillDefault, data\Config.ini, Settings, Key_ESkillDefault
 IniRead, Key_RelicDefault, data\Config.ini, Settings, Key_RelicDefault
 IniRead, key_Overlay, data\Config.ini, Settings, key_Overlay
@@ -149,6 +157,7 @@ IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
 IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
 
 
+IniRead, Checkbox_ZaWarudo, data\Config.ini, Settings, Checkbox_ZaWarudo
 IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
 IniRead, Checkbox_Map, data\Config.ini, Settings, Checkbox_Map
 IniRead, Checkbox_Pautinka, data\Config.ini, Settings, Checkbox_Pautinka
@@ -233,6 +242,8 @@ if Checkbox_Map
 	Hotkey, %key_Map%, Label_Map, on
 if Checkbox_Overlay
 	Hotkey, %key_Overlay%, Label_Overlay, on
+if Checkbox_ZaWarudo
+	Hotkey, %Key_ZaWarudo%, Label_ZaWarudo, on
 
 if Checkbox_Macro
 {
@@ -319,6 +330,14 @@ Return
 ; SleepVarRange-=5
 ; Tooltip % "Delay - " SleepVarRange,round(A_ScreenWidth * .5),0
 ; Return
+
+;===============================Остановить время
+Label_ZaWarudo:
+Sleep 50
+SendInput {%Key_RUltiDefault%} ;                 это ульта, она должна быть заряжена
+SendInput {vk9} ;   это выбор инструмента (таб)
+Sleep 200
+Return
 
 ;===============================Оверлей с подсказками
 Label_Overlay:
