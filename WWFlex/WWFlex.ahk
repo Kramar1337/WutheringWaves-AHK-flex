@@ -3,7 +3,6 @@
 
 
 Esc - Прервать
-Ё - Za warudo (Остановить время) (Описание*)
 F1 - Оверлей
 F2 - Карта
 F - Фастлут
@@ -15,10 +14,8 @@ Numpad 2 - Chixia rage
 Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
 Numpad 5 - Auto pistols
-Numpad 6 - EncoreN1 (Описание*)
-Numpad 7 - RoverHavocN1 (Описание*)
-Numpad 8 - DanjinE1 (Описание*)
-Numpad 9 - High jump (Крюк + Любые мечники)
+Numpad 6 - High jump (Крюк + Любые мечники)
+
 
 
 
@@ -28,15 +25,10 @@ Numpad 9 - High jump (Крюк + Любые мечники)
 Безопасность, хешченжер, неймченжер
 
 
-https://www.youtube.com/watch?v=Ef6ueBoUW0I
-прыжок
-лкм (ждем пик анимации когда герой поднимется выше)
-шифт (или пкм)
-лкм ещё раз
-крюк
+Изменения: 06.06.2024
+ - Пофиксили абуз чипа
 
-
-Изменения: 30.05.2024
+Изменения: 31.05.2024
  - `(тильт) - Za warudo (Накопить ульту и остановить время)
 
 Изменения: 30.05.2024
@@ -152,12 +144,12 @@ IniRead, key_LabelNumpad3, data\Config.ini, Settings, key_LabelNumpad3
 IniRead, key_LabelNumpad4, data\Config.ini, Settings, key_LabelNumpad4
 IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
 IniRead, key_LabelNumpad6, data\Config.ini, Settings, key_LabelNumpad6
-IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
-IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
-IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
+; IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
+; IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
+; IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
 
 
-IniRead, Checkbox_ZaWarudo, data\Config.ini, Settings, Checkbox_ZaWarudo
+; IniRead, Checkbox_ZaWarudo, data\Config.ini, Settings, Checkbox_ZaWarudo
 IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
 IniRead, Checkbox_Map, data\Config.ini, Settings, Checkbox_Map
 IniRead, Checkbox_Pautinka, data\Config.ini, Settings, Checkbox_Pautinka
@@ -168,8 +160,8 @@ IniRead, Checkbox_PauseSuspend, data\Config.ini, Settings, Checkbox_PauseSuspend
 IniRead, Checkbox_Reload, data\Config.ini, Settings, Checkbox_Reload
 
 
-IniRead, RoverHavocTime1, data\Config.ini, Settings, RoverHavocTime1
-IniRead, EncoreTime1, data\Config.ini, Settings, EncoreTime1
+; IniRead, RoverHavocTime1, data\Config.ini, Settings, RoverHavocTime1
+; IniRead, EncoreTime1, data\Config.ini, Settings, EncoreTime1
 IniRead, SelectDefaultMacro, data\Config.ini, Settings, SelectDefaultMacro
 IniRead, SkipNPCLockMode, data\Config.ini, Settings, SkipNPCLockMode
 IniRead, BhopDelayIn, data\Config.ini, Settings, BhopDelayIn
@@ -242,8 +234,6 @@ if Checkbox_Map
 	Hotkey, %key_Map%, Label_Map, on
 if Checkbox_Overlay
 	Hotkey, %key_Overlay%, Label_Overlay, on
-if Checkbox_ZaWarudo
-	Hotkey, *~%Key_ZaWarudo%, Label_ZaWarudo, on
 
 if Checkbox_Macro
 {
@@ -255,9 +245,9 @@ if Checkbox_Macro
 	Hotkey, *~$%key_LabelNumpad4%, LabelNumpad4, on
 	Hotkey, *~$%key_LabelNumpad5%, LabelNumpad5, on
 	Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
-	Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
-	Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
-	Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
+	; Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
+	; Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
+	; Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
 }
 
 Hotkey, *~$%key_EndExitapp%, MetkaMenu1, on
@@ -331,17 +321,7 @@ Return
 ; Tooltip % "Delay - " SleepVarRange,round(A_ScreenWidth * .5),0
 ; Return
 
-;===============================Остановить время
-Label_ZaWarudo:
-Sleep 50
-IfWinNotActive, %WindowFocus%
-	Return
-if FuncCursorVisible()
-	Return
-SendInput {%Key_RUltiDefault%} ;                 это ульта, она должна быть заряжена
-SendInput {vk9} ;   это выбор инструмента (таб)
-Sleep 200
-Return
+
 
 ;===============================Оверлей с подсказками
 Label_Overlay:
@@ -408,12 +388,6 @@ if jopa4
 if jopa5
 	Goto Label_Goto_Auto_pistols
 if jopa6
-	Goto Label_Goto_Encore
-if jopa7
-	Goto Label_Goto_Rover_Havoc
-if jopa8
-	Goto Label_Goto_Danjin
-if jopa9
 	Goto Label_Goto_High_jump
 Return
 ;===============================Off
@@ -475,42 +449,12 @@ ToolTip, Auto pistols, 0, 0
 sleep 500
 ToolTip
 Return
-;===============================Encore Spam N1
+;===============================High jump
 LabelNumpad6:
 IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa6:=true
-ToolTip, Encore Spam N1, 0, 0
-sleep 500
-ToolTip
-Return
-;===============================RoverHavoc N1
-LabelNumpad7:
-IfWinNotActive, %WindowFocus%
-	Return
-FuncMacroRestore()
-jopa7:=true
-ToolTip, RoverHavoc N1, 0, 0
-sleep 500
-ToolTip
-Return
-;===============================Danjin N1
-LabelNumpad8:
-IfWinNotActive, %WindowFocus%
-	Return
-FuncMacroRestore()
-jopa8:=true
-ToolTip, Danjin N1, 0, 0
-sleep 500
-ToolTip
-Return
-;===============================High jump
-LabelNumpad9:
-IfWinNotActive, %WindowFocus%
-	Return
-FuncMacroRestore()
-jopa9:=true
 ToolTip, High jump, 0, 0
 sleep 500
 ToolTip
@@ -539,48 +483,8 @@ SendInput {vk54}
 Sleep 200
 SendInput {vk20}
 Return
-;===============================Danjin N1
-Label_Goto_Danjin:
-Loop
-{
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
-        break 
-	SendInput {%Key_ESkillDefault%}
-	sleep 15
-	SendInput {%Key_RelicDefault%}
-	Sleep 15
-}
-Return
-
-;===============================RoverHavoc N1
-Label_Goto_Rover_Havoc:
-Loop
-{
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
-        break 
-	SendInput {vk1}
-	sleep 1
-	SendInput {%Key_RelicDefault%}
-	Sleep %RoverHavocTime1%
-}
-Return
 
 
-;===============================Encore Spam N1
-Label_Goto_Encore:
-Loop
-{
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
-        break 
-	SendInput {vk1}
-	sleep 1
-	SendInput {%Key_RelicDefault%}
-	Sleep %EncoreTime1%
-}
-Return
 
 ;===============================Auto pistols
 Label_Goto_Auto_pistols:
@@ -822,12 +726,6 @@ TimerNpcSkip:
 Sleep 100
 if ((!FuncCursorVisible() || !WinActive(WindowFocus)) || (GetKeyVK(A_PriorKey) != GetKeyVK(key_SkipNPC)))
 {
-	; if !FuncCursorVisible()
-	; Tooltip 1
-	; if !WinActive(WindowFocus)
-	; Tooltip 2
-	; if (GetKeyVK(A_PriorKey) != GetKeyVK(key_SkipNPC))
-	; Tooltip %A_PriorKey%`n%key_SkipNPC%
 	Toggle1SkipNPC := !Toggle1SkipNPC
 	SetTimer, TimerNpcSkip, off
 	Tooltip,,0,0,2
@@ -1028,7 +926,7 @@ MetkaMenu6:
     MsgBox,,, Настройки импортированы`n`nReload!,1
 	Reload
 Return
-;============================Меню, 
+;============================Меню, Обновление
 MetkaMenu7:
     ; Задаем путь для сохранения файла обновления
     UpdatePath := A_ScriptDir "\update\main.zip"
