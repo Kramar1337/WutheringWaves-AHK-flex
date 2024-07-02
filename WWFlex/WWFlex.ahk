@@ -7,23 +7,46 @@ F1 - Оверлей
 F2 - Карта
 F - Фастлут
 Z - Скип диалогов
-V - Macro Key
+V - Macro Key1 (Numpad)
+Caps Lock - Macro Key2 (Alt + Numpad)
 Numpad 0 - Off
 Numpad 1 - AutoAttack
-Numpad 2 - Chixia rage
+Numpad 2 - Chixia rage (< 60 Fps)
 Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
-Numpad 5 - Auto pistols
-Numpad 6 - High jump (Крюк + Любые мечники)
-
+Numpad 5 - Chixia rage++ (> 60 Fps)
+Numpad 6 - High jump (Любые мечники)
+Numpad 7 - Auto pistols
+Alt + Numpad 0 - Off
+Alt + Numpad 1 - AutoAttack
+Alt + Numpad 2 - Chixia rage (< 60 Fps)
+Alt + Numpad 3 - Shift Spam
+Alt + Numpad 4 - Sanhua hold++
+Alt + Numpad 5 - Chixia rage++ (> 60 Fps)
+Alt + Numpad 6 - High jump (Любые мечники)
+Alt + Numpad 7 - Auto pistols
 
 
 
 
 Запланировано:
-Лого при запуске
-Безопасность, хешченжер, неймченжер
 
+
+
+
+
+
+
+Изменения: 01.07.2024
+ - Автовыход, парамерт "AutoExitAHK=1"
+ - Возможность перебиндить "G" прицеливание, парамерт Key_GAimDefault
+ - Numpad 2 - Chixia rage (< 60 Fps)
+ - Numpad 5 - Chixia rage++ (> 60 Fps)
+ - Numpad 7 - Auto pistols
+ - Numpad 6 - High jump стал юзабельным, без релика
+ - V - Macro Key1 (Numpad)
+ - Caps Lock - Macro Key2 (Alt + Numpad)
+ - Оверлей
 
 Изменения: 06.06.2024
  - Пофиксили абуз чипа
@@ -79,12 +102,68 @@ Numpad 6 - High jump (Крюк + Любые мечники)
 
 
 
-4-3-3-1-1 = 12
+
 Wuthering Waves  
 ahk_class UnrealWindow
 ahk_exe Client-Win64-Shipping.exe
 H:\Wuthering Waves\Wuthering Waves Game\Wuthering Waves.exe
 H:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\Client-Win64-Shipping.exe
+
+
+
+
+https://www.reddit.com/r/WutheringWaves/comments/1dh0iyk/calculation_of_all_possible_asterite_you_can_get/
+
+
+
+-malloc=system -USEALLAVAILABLECORES -forcecache -novsync -NoPostProcess -PreloadShaders -ForcePreloadTextures -DiskCache -LoadAllLevels -NotLazyLoad -NoVerifyGC
+
+
+-notexturestreaming
+ломает игру Отключает стриминг текстур, что может уменьшить задержки, связанные с подгрузкой текстур
+
+-malloc=system
+системный аллокатор памяти вместо собственного
+
+-USEALLAVAILABLECORES
+Указывает движку использовать все доступные процессорные ядра
+
+-maxMem=13000
+Устанавливает ограничение на максимальное количество оперативной памяти
+
++mat_antialias 0
+Отключает антиалиасинг (сглаживание) для материалов
+
+-lowqualitymaterials
+Уменьшает качество материалов, что может значительно повысить производительность
+
+-novsync
+Отключает вертикальную синхронизацию, что может снизить задержку ввода.
+
+-dx12
+Задает конкретную версию DirectX
+
+-sm4
+Принудительно включает использование шейдерной модели 4 вместо 5
+
+-fps=60
+Устанавливает максимальную частоту кадров
+
+-NoThrottle
+Отключает регулирование частоты кадров, позволяя игре работать на максимально возможной частоте кадров
+
+-nohmd
+Отключает поддержку VR, если она включена, что может повысить производительность.
+
+
+-NoScreenMessages
+Отключает экранные сообщения, что может помочь немного снизить нагрузку на систему
+
+-ForceLOD=1
+Принудительно устанавливает уровень детализации (LOD) на самый низкий уровень
+
+
+
 
 */
 
@@ -124,10 +203,12 @@ If !(A_IsAdmin || RegExMatch(CommandLine, " /restart(?!\S)"))
 }
 
 
-IniRead, Key_RUltiDefault, data\Config.ini, Settings, Key_RUltiDefault
-IniRead, Key_ZaWarudo, data\Config.ini, Settings, Key_ZaWarudo
-IniRead, Key_ESkillDefault, data\Config.ini, Settings, Key_ESkillDefault
-IniRead, Key_RelicDefault, data\Config.ini, Settings, Key_RelicDefault
+IniRead, key_MacroTwo, data\Config.ini, Settings, key_MacroTwo
+IniRead, key_GAimDefault, data\Config.ini, Settings, key_GAimDefault
+IniRead, key_RUltiDefault, data\Config.ini, Settings, key_RUltiDefault
+IniRead, key_ZaWarudo, data\Config.ini, Settings, key_ZaWarudo
+IniRead, key_ESkillDefault, data\Config.ini, Settings, key_ESkillDefault
+IniRead, key_RelicDefault, data\Config.ini, Settings, key_RelicDefault
 IniRead, key_Overlay, data\Config.ini, Settings, key_Overlay
 IniRead, key_Map, data\Config.ini, Settings, key_Map
 IniRead, key_Pautinka, data\Config.ini, Settings, key_Pautinka
@@ -144,10 +225,20 @@ IniRead, key_LabelNumpad3, data\Config.ini, Settings, key_LabelNumpad3
 IniRead, key_LabelNumpad4, data\Config.ini, Settings, key_LabelNumpad4
 IniRead, key_LabelNumpad5, data\Config.ini, Settings, key_LabelNumpad5
 IniRead, key_LabelNumpad6, data\Config.ini, Settings, key_LabelNumpad6
-; IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
+IniRead, key_LabelNumpad7, data\Config.ini, Settings, key_LabelNumpad7
 ; IniRead, key_LabelNumpad8, data\Config.ini, Settings, key_LabelNumpad8
 ; IniRead, key_LabelNumpad9, data\Config.ini, Settings, key_LabelNumpad9
 
+IniRead, key_LabelANumpad0, data\Config.ini, Settings, key_LabelANumpad0
+IniRead, key_LabelANumpad1, data\Config.ini, Settings, key_LabelANumpad1
+IniRead, key_LabelANumpad2, data\Config.ini, Settings, key_LabelANumpad2
+IniRead, key_LabelANumpad3, data\Config.ini, Settings, key_LabelANumpad3
+IniRead, key_LabelANumpad4, data\Config.ini, Settings, key_LabelANumpad4
+IniRead, key_LabelANumpad5, data\Config.ini, Settings, key_LabelANumpad5
+IniRead, key_LabelANumpad6, data\Config.ini, Settings, key_LabelANumpad6
+IniRead, key_LabelANumpad7, data\Config.ini, Settings, key_LabelANumpad7
+; IniRead, key_LabelANumpad8, data\Config.ini, Settings, key_LabelANumpad8
+; IniRead, key_LabelANumpad9, data\Config.ini, Settings, key_LabelANumpad9
 
 ; IniRead, Checkbox_ZaWarudo, data\Config.ini, Settings, Checkbox_ZaWarudo
 IniRead, Checkbox_Overlay, data\Config.ini, Settings, Checkbox_Overlay
@@ -162,7 +253,12 @@ IniRead, Checkbox_Reload, data\Config.ini, Settings, Checkbox_Reload
 
 ; IniRead, RoverHavocTime1, data\Config.ini, Settings, RoverHavocTime1
 ; IniRead, EncoreTime1, data\Config.ini, Settings, EncoreTime1
+
+IniRead, AutoExitAHK, data\Config.ini, Settings, AutoExitAHK
 IniRead, SelectDefaultMacro, data\Config.ini, Settings, SelectDefaultMacro
+IniRead, SelectDefaultMacroX2, data\Config.ini, Settings, SelectDefaultMacroX2
+
+
 IniRead, SkipNPCLockMode, data\Config.ini, Settings, SkipNPCLockMode
 IniRead, BhopDelayIn, data\Config.ini, Settings, BhopDelayIn
 IniRead, FastlytFastMode, data\Config.ini, Settings, FastlytFastMode
@@ -177,6 +273,13 @@ Loop 30
 	jopa%IndexVarL% := false
 }
 jopa%SelectDefaultMacro%:=true
+
+Loop 30
+{
+	IndexVarL := A_Index - 1
+	x2jopa%IndexVarL% := false
+}
+x2jopa%SelectDefaultMacroX2%:=true
 
 AntiVACHashChanger:="fghfh3534gjdgdfgfj6867jhmbdsq4123asddfgdfgaszxxcasdf423dfght7657ghnbnghrtwer32esdfgr65475dgdgdf6867ghjkhji7456wsdfsf34sdfsdf324sdfgdfg453453453456345gdgdgdfsf"
 
@@ -245,9 +348,21 @@ if Checkbox_Macro
 	Hotkey, *~$%key_LabelNumpad4%, LabelNumpad4, on
 	Hotkey, *~$%key_LabelNumpad5%, LabelNumpad5, on
 	Hotkey, *~$%key_LabelNumpad6%, LabelNumpad6, on
-	; Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
+	Hotkey, *~$%key_LabelNumpad7%, LabelNumpad7, on
 	; Hotkey, *~$%key_LabelNumpad8%, LabelNumpad8, on
 	; Hotkey, *~$%key_LabelNumpad9%, LabelNumpad9, on
+
+	Hotkey, *~$%key_MacroTwo%, Metkakey_macroTwo, on
+	Hotkey, *~$%key_LabelANumpad0%, LabelANumpad0, on
+	Hotkey, *~$%key_LabelANumpad1%, LabelANumpad1, on
+	Hotkey, *~$%key_LabelANumpad2%, LabelANumpad2, on
+	Hotkey, *~$%key_LabelANumpad3%, LabelANumpad3, on
+	Hotkey, *~$%key_LabelANumpad4%, LabelANumpad4, on
+	Hotkey, *~$%key_LabelANumpad5%, LabelANumpad5, on
+	Hotkey, *~$%key_LabelANumpad6%, LabelANumpad6, on
+	Hotkey, *~$%key_LabelANumpad7%, LabelANumpad7, on
+	; Hotkey, *~$%key_LabelANumpad8%, LabelANumpad8, on
+	; Hotkey, *~$%key_LabelANumpad9%, LabelANumpad9, on
 }
 
 Hotkey, *~$%key_EndExitapp%, MetkaMenu1, on
@@ -264,7 +379,7 @@ Loop, parse, GroupNameMapVar, `n, `r
 
 ;===============================Оверлей создание
 OverlaySt = 1
-OverlayStList = 3
+OverlayStList = 5
 Random, RandomVar1, 33, 35
 RandomNameOverlay := gen_password(RandomVar1)	
 Gui, 99: +AlwaysOnTop +ToolWindow -Caption +LastFound -DPIScale
@@ -273,15 +388,50 @@ Gui, 99: Add, Picture, w%A_ScreenWidth% h%A_ScreenHeight% x0 y0 vMyPictureVar1, 
 Gui, 99: Show, Hide w%A_ScreenWidth% h%A_ScreenHeight% x0 y0, %RandomNameOverlay%
 hwndGuihamdlewindow := WinExist()
 Gui, 99: Cancel
-
+if AutoExitAHK
+SetTimer, ExitOnGameClose, 3000 	;Автовыход через 3 секунды если нет окна игры или лаунчера
 
 
 
 SleepVarRange = 300
 Return
 
+;=====================================Если игра закрыта то скрипт сам закроется
+ExitOnGameClose() {
+    global WindowFocus
+    if (!WinExist(WindowFocus)) {
+		MsgBox,,, AutoClose, 1
+        ExitApp
+    }
+}
 
 
+
+	; SendInput {vk47 Down}
+	; Sleep 15
+	; SendInput {vk47 up}
+	; MouseClick, left, , , , D
+	; Sleep 15
+	; MouseClick, left, , , , U
+	; Sleep 15
+
+	; SendInput {vk47 Down}
+	; Sleep 15
+	; SendInput {vk47 up}
+	; SendInput {vk1 Down}
+	; Sleep 15
+	; SendInput {vk1 up}
+	; Sleep 15
+
+	; SendInput {vk47 Down}
+	; Sleep 15
+	; SendInput {vk47 up}
+	; MouseClick, left, , , , D
+	; Sleep 15
+	; MouseClick, left, , , , U
+	; Sleep 15
+
+; Return
 ; *~$X::
 ; IfWinNotActive, %WindowFocus%
 	; Return
@@ -386,16 +536,40 @@ if jopa3
 if jopa4
 	Goto Label_Goto_Sanhua
 if jopa5
-	Goto Label_Goto_Auto_pistols
+	Goto Label_Goto_Chixia_RagePP
 if jopa6
 	Goto Label_Goto_High_jump
+if jopa7
+	Goto Label_Goto_Auto_pistols
+Return
+;============================Макросы2
+Metkakey_macroTwo:
+Sleep 1
+IfWinNotActive, %WindowFocus%
+	Return
+if FuncCursorVisible()
+	Return
+if x2jopa1
+	Goto Label_Goto_Auto_Attack
+if x2jopa2
+	Goto Label_Goto_Chixia_Rage
+if x2jopa3
+	Goto Label_Goto_Bhop
+if x2jopa4
+	Goto Label_Goto_Sanhua
+if x2jopa5
+	Goto Label_Goto_Chixia_RagePP
+if x2jopa6
+	Goto Label_Goto_High_jump
+if x2jopa7
+	Goto Label_Goto_Auto_pistols
 Return
 ;===============================Off
 LabelNumpad0:
 IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
-ToolTip, Off, 0, 0
+ToolTip,1M Off, 0, 0
 sleep 500
 ToolTip
 Return
@@ -405,7 +579,7 @@ IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa1:=true
-ToolTip, AAtack, 0, 0
+ToolTip,1M AAtack, 0, 0
 sleep 500
 ToolTip
 Return
@@ -415,7 +589,7 @@ IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa2:=true
-ToolTip, Chixia Rage, 0, 0
+ToolTip,1M Chixia Rage, 0, 0
 sleep 500
 ToolTip
 Return
@@ -425,7 +599,7 @@ IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa3:=true
-ToolTip, Shift Spam, 0, 0
+ToolTip,1M Shift Spam, 0, 0
 sleep 500
 ToolTip
 Return
@@ -435,17 +609,17 @@ IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa4:=true
-ToolTip, Sanhua hold, 0, 0
+ToolTip,1M Sanhua hold, 0, 0
 sleep 500
 ToolTip
 Return
-;===============================Auto pistols
+;===============================Chixia Rage++
 LabelNumpad5:
 IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa5:=true
-ToolTip, Auto pistols, 0, 0
+ToolTip,1M Chixia Rage++, 0, 0
 sleep 500
 ToolTip
 Return
@@ -455,12 +629,101 @@ IfWinNotActive, %WindowFocus%
 	Return
 FuncMacroRestore()
 jopa6:=true
-ToolTip, High jump, 0, 0
+ToolTip,1M High jump, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Auto pistols
+LabelNumpad7:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestore()
+jopa7:=true
+ToolTip,1M Auto pistols, 0, 0
 sleep 500
 ToolTip
 Return
 
-
+;=================================================================x2jopa
+;===============================Off
+LabelANumpad0:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+ToolTip,2M Off, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================AAtack
+LabelANumpad1:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa1:=true
+ToolTip,2M AAtack, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Чися рейдж
+LabelANumpad2:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa2:=true
+ToolTip,2M Chixia Rage, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Shift Spam
+LabelANumpad3:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa3:=true
+ToolTip,2M Shift Spam, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Sanhua hold
+LabelANumpad4:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa4:=true
+ToolTip,2M Sanhua hold, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Chixia Rage++
+LabelANumpad5:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa5:=true
+ToolTip,2M Chixia Rage++, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================High jump
+LabelANumpad6:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa6:=true
+ToolTip,2M High jump, 0, 0
+sleep 500
+ToolTip
+Return
+;===============================Auto pistols
+LabelANumpad7:
+IfWinNotActive, %WindowFocus%
+	Return
+FuncMacroRestoreX2()
+x2jopa7:=true
+ToolTip,2M Auto pistols, 0, 0
+sleep 500
+ToolTip
+Return
 
 
 
@@ -475,24 +738,17 @@ SendInput {vk1 up}
 Sleep 290
 SendInput {vkA0}
 Sleep 100
-SendInput {vk1 down}
-Sleep 100
-SendInput {vk1 up}
-Sleep 290
-SendInput {vk54}
-Sleep 200
 SendInput {vk20}
 Return
-
-
 
 ;===============================Auto pistols
 Label_Goto_Auto_pistols:
 Loop
 {
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
-        break 
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
+        break
 	SendInput {vk1 down}
 	Sleep 260
 	SendInput {vk1 up}
@@ -500,37 +756,41 @@ Loop
 }
 Return
 
-
 ;===============================Sanhua hold
 Label_Goto_Sanhua:
 Loop 
 {
-	GetKeyState, StateA, vk1
-	if StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 		SendInput, {vk1 down}
-	GetKeyState, StateA, %key_Macro%, P
-	if StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 	{
 		SendInput, {vk1 up}
 		break
 	}
 	Sleep 300
-	GetKeyState, StateA, %key_Macro%, P
-	if StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 	{
 		SendInput, {vk1 up}
 		break
 	}
 	Sleep 300
-	GetKeyState, StateA, %key_Macro%, P
-	if StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 	{
 		SendInput, {vk1 up}
 		break
 	}
 	Sleep 300
-	GetKeyState, StateA, %key_Macro%, P
-	if StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 	{
 		SendInput, {vk1 up}
 		break
@@ -540,54 +800,19 @@ Loop
 }
 Return
 
-
-/*
-900 - 1 тайминг
-380 - 2 тайминг
-; Sanhua hold. Старый режим через поиск пикселя, медленный и не надежный
-startX := round(A_ScreenWidth * (1070 / 2560))
-startY := round(A_ScreenHeight * (1320 / 1440))
-endX := round(A_ScreenWidth * (1460 / 2560))
-endY := round(A_ScreenHeight * (1350 / 1440))
-blueColor := 0x96DCEC  ; blue
-whiteColor := 0xFFFFFF  ; white
-Loop 
-{
-	GetKeyState, StateA, vk1
-	if StateA = U
-		SendInput, {vk1 down}
-	GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
-	{
-		SendInput, {vk1 up}
-        break
-	}
-    PixelSearch, foundX, foundY, startX, startY, endX, endY, blueColor, 20, Fast RGB
-    if (ErrorLevel = 0) 
-	{
-        PixelSearch,,, foundX-4, foundY-4, foundX+4, foundY+4, whiteColor, 0, Fast RGB
-		if (ErrorLevel = 0) 
-		{
-			SendInput, {vk1 up}
-			Sleep 450
-		}
-    }
-    Sleep 1
-}
-Return
-*/
-
 ;===============================Shift Spam
 Label_Goto_Bhop:
 Loop
 {
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
         break 
 	SendInput {vkA0}
 	Sleep 230
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
         break
 	Sleep 300
 }
@@ -597,8 +822,9 @@ Return
 Label_Goto_Auto_Attack:
 Loop
 {
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
         break 
     Sleep 50
 	FuncRandomSleep()
@@ -607,6 +833,7 @@ Loop
 Return
 ;==========Чися рейдж========================
 Label_Goto_Chixia_Rage:
+; MsgBox 1
 Sleep 1
 
 red := 0xFF0000
@@ -634,31 +861,85 @@ else {
 PixelGetColor, GetPix, xPix, yPix, RGB
 if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
 {
-	SendInput {vk47}
+	SendInput {%Key_GAimDefault%}
 	Sleep 50
 }
 
 Loop
 {
-    GetKeyState, StateA, %key_Macro%, P
-    If StateA = U
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
 	{
 		Sleep 80
 		PixelGetColor, GetPix, xPix, yPix, RGB
 		if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
 		{
-			SendInput {vk47} 	;G vk47
+			SendInput {%Key_GAimDefault%} 	;G vk47
 		}
         break
 	}
-	SendInput {vk47} 	;G vk47
+	SendInput {%Key_GAimDefault%} 	;G vk47
 	Sleep 35
 		SendInput {vk1}
 		Sleep 35
-	SendInput {vk47} 	;G vk47
+	SendInput {%Key_GAimDefault%} 	;G vk47
 	Sleep 35
 }
-; 35
+Return
+
+;==========Чися рейдж++========================
+Label_Goto_Chixia_RagePP:
+Sleep 1
+
+red := 0xFF0000
+dark_red := 0x871B15
+delta := 12
+
+WinGet, hWndVar1, ID, %WindowFocus%
+VarSetCapacity(rect, 16)
+DllCall("GetClientRect", "Ptr", hWndVar1, "Ptr", &rect)
+WidthVar1 := NumGet(rect, 8, "Int")
+HeightVar1 := NumGet(rect, 12, "Int")
+if DetermineAspectRatio(WidthVar1, HeightVar1) = "16:10" {
+	xPix := round(A_ScreenWidth * (1323 / 1920))
+	yPix := round(A_ScreenHeight * (1101 / 1200))
+}
+else if DetermineAspectRatio(WidthVar1, HeightVar1) = "16:9" {
+	xPix := round(A_ScreenWidth * (1757 / 2560))
+	yPix := round(A_ScreenHeight * (1300 / 1440))
+}
+else {
+	xPix := round(A_ScreenWidth * (1757 / 2560))
+	yPix := round(A_ScreenHeight * (1300 / 1440))
+}
+
+PixelGetColor, GetPix, xPix, yPix, RGB
+if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
+{
+	SendInput {%Key_GAimDefault%}
+	Sleep 50
+}
+
+Loop
+{
+    GetKeyState, State1, %key_Macro%, P
+	GetKeyState, State2, %key_MacroTwo%, P
+	if (State1 = "U" and State2 = "U")
+	{
+		Sleep 80
+		PixelGetColor, GetPix, xPix, yPix, RGB
+		if (ColorRGBCompare(GetPix, red, delta) || ColorRGBCompare(GetPix, dark_red, delta))
+		{
+			SendInput {%Key_GAimDefault%} 	;G vk47
+		}
+        break
+	}
+	SendInput {%Key_GAimDefault%}
+	Sleep 15
+	SendInput {vk1}
+	Sleep 15
+}
 Return
 
 
@@ -775,6 +1056,16 @@ Global
 	{
 		IndexVarL := A_Index - 1
 		jopa%IndexVarL% := false
+	}
+}
+;==========================================Функция сброса x2
+FuncMacroRestoreX2()
+{
+Global
+	Loop 26
+	{
+		IndexVarL := A_Index - 1
+		x2jopa%IndexVarL% := false
 	}
 }
 
