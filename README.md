@@ -1,4 +1,4 @@
-# WutheringWaves AHK flex v1.3
+# WutheringWaves AHK flex v1.4
 
 AHK скрипт для Wuthering Waves.
 
@@ -37,18 +37,29 @@ __🚀Функционал:🚀__
 :musical_keyboard:__Горячие клавиши:__:musical_keyboard:
 ```
 End - Завершить работу
+Esc - Прервать
 F1 - Оверлей
 F2 - Карта
 F - Фастлут
 Z - Скип диалогов
-V - Macro Key
+V - Macro Key1 (Numpad)
+Caps Lock - Macro Key2 (Alt + Numpad)
 Numpad 0 - Off
 Numpad 1 - AutoAttack
-Numpad 2 - Chixia rage
+Numpad 2 - Chixia rage (< 60 Fps)
 Numpad 3 - Shift Spam
 Numpad 4 - Sanhua hold++
-Numpad 5 - Auto pistols
-Numpad 6 - High jump (Крюк + Любые мечники)
+Numpad 5 - Chixia rage++ (> 60 Fps)
+Numpad 6 - High jump (Любые мечники)
+Numpad 7 - Auto pistols
+Alt + Numpad 0 - Off
+Alt + Numpad 1 - AutoAttack
+Alt + Numpad 2 - Chixia rage (< 60 Fps)
+Alt + Numpad 3 - Shift Spam
+Alt + Numpad 4 - Sanhua hold++
+Alt + Numpad 5 - Chixia rage++ (> 60 Fps)
+Alt + Numpad 6 - High jump (Любые мечники)
+Alt + Numpad 7 - Auto pistols
 ```
 
 <details>
@@ -65,12 +76,14 @@ Numpad 6 - High jump (Крюк + Любые мечники)
 ; Где их брать? Гуглить или запускай WWFlex\data\debug\VirtualCodeKeys.ahk
 [Settings]
 ;================Горячие клавиши
-Key_RUltiDefault=vk51
-Key_ESkillDefault=vk45
-Key_RelicDefault=vk54
+key_RUltiDefault=vk51
+key_ESkillDefault=vk45
+key_RelicDefault=vk54
+key_GAimDefault=vk47
 key_Overlay=F1
 key_Map=F2
 key_Macro=V
+key_MacroTwo=CapsLock
 key_SkipNPC=Z
 key_Fastlyt=F
 key_EndExitapp=End
@@ -83,6 +96,16 @@ key_LabelNumpad3=Numpad3
 key_LabelNumpad4=Numpad4
 key_LabelNumpad5=Numpad5
 key_LabelNumpad6=Numpad6
+key_LabelNumpad7=Numpad7
+
+key_LabelANumpad0=!Numpad0
+key_LabelANumpad1=!Numpad1
+key_LabelANumpad2=!Numpad2
+key_LabelANumpad3=!Numpad3
+key_LabelANumpad4=!Numpad4
+key_LabelANumpad5=!Numpad5
+key_LabelANumpad6=!Numpad6
+key_LabelANumpad7=!Numpad7
 ;================Вкл-выкл
 Checkbox_Overlay=1
 Checkbox_Map=1
@@ -92,7 +115,10 @@ Checkbox_Fastlyt=1
 Checkbox_PauseSuspend=0
 Checkbox_Reload=1
 ;================Прочее
+; Автоматически закрывать скрипт через 3 сек если нет окна игры или лаунчера
+AutoExitAHK=0
 SelectDefaultMacro=2
+SelectDefaultMacroX2=2
 SkipNPCLockMode=1
 BhopDelayIn=100
 FastlytFastMode=1
@@ -158,7 +184,7 @@ F - Фастлут.
 
 0 - Обычный режим.
 
-V - Macro Key.
+V - Macro Key1 (Numpad)
 
 Активирует макрос. Выбранный ниже. В "data\Config.ini" параметр "SelectDefaultMacro" выбирает активный макрос по умолчанию.
 
@@ -166,15 +192,37 @@ Numpad 0 - Off - отключить.
 
 Numpad 1 - AutoAttack - Спам автоатаки.
 
-Numpad 2 - Chixia rage - Абузит анимацию прицеливания, Чися стреляет очень быстро.
+Numpad 2 - Chixia rage (< 60 Fps)
 
-Numpad 3 - Shift Spam - Спамит Shift
+Numpad 3 - Shift Spam
 
 Numpad 4 - Sanhua hold++ - Отжимает холд тычки в тайминг.
 
-Numpad 5 - Auto pistols - Быстрая стрельба на любых пистолетчиках, для драки не годится, только для головоломочек.
+Numpad 5 - Chixia rage++ (> 60 Fps)
 
-Numpad 6 - High jump (Крюк + Любые мечники), одиночное нажатие.
+Numpad 6 - High jump (Мечники), одиночное нажатие.
+
+Numpad 7 - Auto pistols - Быстрая стрельба на любых пистолетчиках, для драки не годится, только для головоломочек.
+
+Caps Lock - Macro Key2 (Alt + Numpad)
+
+Активирует макрос. Выбранный ниже. В "data\Config.ini" параметр "SelectDefaultMacroX2" выбирает активный макрос по умолчанию.
+
+Alt + Numpad 0 - Off
+
+Alt + Numpad 1 - AutoAttack
+
+Alt + Numpad 2 - Chixia rage (< 60 Fps)
+
+Alt + Numpad 3 - Shift Spam
+
+Alt + Numpad 4 - Sanhua hold++
+
+Alt + Numpad 5 - Chixia rage++ (> 60 Fps)
+
+Alt + Numpad 6 - High jump (Любые мечники)
+
+Alt + Numpad 7 - Auto pistols
 
 End - Завершить работу
 
@@ -186,6 +234,18 @@ Home - Перезапуск. По умолчанию отключено."data\Co
 
 <details>
 <summary> 📃 Список изменений 📃 </summary>
+
+Изменения: 01.07.2024
+
+ - Автовыход, парамерт "AutoExitAHK=1"
+ - Возможность перебиндить "G" прицеливание, парамерт Key_GAimDefault
+ - Numpad 2 - Chixia rage (< 60 Fps)
+ - Numpad 5 - Chixia rage++ (> 60 Fps)
+ - Numpad 7 - Auto pistols
+ - Numpad 6 - High jump стал юзабельным, без релика
+ - V - Macro Key1 (Numpad)
+ - Caps Lock - Macro Key2 (Alt + Numpad)
+ - Оверлей
 
 Изменения: 06.06.2024
 
