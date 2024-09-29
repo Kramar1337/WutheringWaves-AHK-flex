@@ -320,6 +320,10 @@ ySkip3:=round(A_ScreenHeight * (800 / 1440))
 xSkip4:=round(A_ScreenWidth * (1722 / 2560))
 ySkip4:=round(A_ScreenHeight * (900 / 1440))
 
+xSkip5:=round(A_ScreenWidth * (1700 / 2560))
+ySkip5:=round(A_ScreenHeight * (1000 / 1440))
+
+
 
 Hotkey, IfWinActive, %WindowFocus%
 if Checkbox_SkipNPC
@@ -999,6 +1003,9 @@ Else
 		Click %xSkip3% %ySkip3%
 		FuncRandomSleep()
 		Click %xSkip4% %ySkip4%
+		
+		FuncRandomSleep()
+		Click %xSkip5% %ySkip5%
 	}
 }
 Return
@@ -1019,6 +1026,9 @@ FuncRandomSleep()
 Click %xSkip3% %ySkip3%
 FuncRandomSleep()
 Click %xSkip4% %ySkip4%
+
+FuncRandomSleep()
+Click %xSkip5% %ySkip5%
 Return
 
 
